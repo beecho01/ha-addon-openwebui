@@ -1,6 +1,6 @@
 {
   "name": "Open WebUI",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "slug": "openwebui",
   "description": "Open WebUI - self-hosted AI interface integrated as a Home Assistant add-on",
   "url": "https://github.com/beecho01/ha-addon-openwebui",
@@ -19,5 +19,8 @@
     "data:rw"
   ],
   "panel_icon": "mdi:forum",
-  "panel_title": "Open WebUI"
+  "panel_title": "Open WebUI",
+  "startup": "application",
+  "boot": "auto",
+  "ingress": true
 }
