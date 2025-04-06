@@ -1,0 +1,12 @@
+{
+    "schema": {
+        "webui_port": "port?",
+        "webui_auth": "bool?",
+        "secret_key": "str?"
+    },
+    "default": {
+        "webui_port": 3000,
+        "webui_auth": true,
+        "secret_key": ""
+    }
+}
