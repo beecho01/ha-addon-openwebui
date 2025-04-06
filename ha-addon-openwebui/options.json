@@ -1,8 +1,0 @@
-{
-    "schema": {
-        "webui_port": "port?"
-    },
-    "default": {
-        "webui_port": 3000
-    }
-}

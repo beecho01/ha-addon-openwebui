@@ -1,6 +1,6 @@
 {
   "name": "Open WebUI",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "slug": "openwebui",
   "description": "Open WebUI - self-hosted AI interface integrated as a Home Assistant add-on",
   "url": "https://github.com/beecho01/ha-addon-openwebui",
@@ -12,9 +12,9 @@
     "3000/tcp": 3000
   },
   "ports_description": {
-    "[webui_port]/tcp": "Open WebUI Web interface"
+    "3000/tcp": "Open WebUI Web interface"
   },
-  "webui": "http://[HOST]:[PORT:[webui_port]]/",
+  "webui": "http://[HOST]:[PORT:3000]/",
   "map": [
     "data:rw"
   ],
