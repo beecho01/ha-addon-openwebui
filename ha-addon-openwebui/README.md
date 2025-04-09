@@ -1,6 +1,36 @@
-# Home Assistant Add-on: Open WebUI
+<div id="top">
 
-A Home Assistant add-on for [Open WebUI][Open WebUI] — a sleek, self-hosted AI interface designed to work with models like those served by Ollama.
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/beecho01/umbrel-web-app/refs/heads/main/docs/assets/svg/logo.svg" alt="Logo" width="15%">
+  </p>
+
+  <h1 align="center">Open WebUI Addon for Home Assistant</h1>
+
+  <p align="center">
+    <em>A Home Assistant add-on for [Open WebUI][Open WebUI] — a sleek, self-hosted AI interface designed to work with models like those served by Ollama.</em>
+  </p>
+
+  <p align="center">
+    <img src="https://img.shields.io/github/languages/top/beecho01/ha-addon-openwebui?style=for-the-badge&color=18BCF2">
+    <img src="https://img.shields.io/github/languages/code-size/beecho01/ha-addon-openwebui?style=for-the-badge&color=18BCF2">
+    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-8257e6?style=for-the-badge&logoColor=white&label=License&color=18BCF2""></a>
+    <a href="https://buymeacoffee.com/beecho01"><img style="height: 28px;" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji= &slug=beecho01&button_colour=18bcf2&font_colour=FFFFFF&font_family=Inter&outline_colour=FFFFFF&coffee_colour=FFDD00" /></a>
+  </p>
+
+</div>
+
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
+
+## Quick Links
+
+- [About](#about)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [License](#license)
+
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## About
 
@@ -8,17 +38,11 @@ A Home Assistant add-on for [Open WebUI][Open WebUI] — a sleek, self-hosted AI
 
 This add-on lets you easily run [Open WebUI][Open WebUI] as part of your Home Assistant ecosystem using the official Open WebUI [docker image][docker].
 
-<a href="https://buymeacoffee.com/beecho01"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=😋&slug=beecho01&button_colour=18bcf2&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00" /></a>
-
 ![Open WebUI Version][openwebui-version]
 ![Ingress][ingres-badge]
 ![Supported Architectures][archs]
 
-| Light Mode                 | Dark Mode                |
-| -------------------------- | ------------------------ |
-| ![Light screenshot][light] | ![Dark screenshot][dark] |
-
----
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## Features
 
@@ -27,14 +51,14 @@ This add-on lets you easily run [Open WebUI][Open WebUI] as part of your Home As
 - Persistent storage across updates
 - Support for multiple CPU architectures (amd64, arm64)
 
----
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## Requirements
 
 - Home Assistant OS or Supervised installation
 - Optionally, Ollama or another OpenAI-compatible backend running on your network
 
----
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## Installation
 
@@ -49,7 +73,7 @@ The installation of this add-on is pretty straightforward and no different to in
 1. Check the logs of the add-on to see if everything went well.
 1. Click the `OPEN WEB UI` button to open Open WebUI.
 
----
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## Configuration
 
@@ -60,13 +84,11 @@ Optional environment settings can be customised by modifying `run.sh`, such as:
 - `WEBUI_AUTH=false` to disable login (not recommended for shared access)
 - `WEBUI_SECRET_KEY` to control session encryption (persisted automatically)
 
----
+<img src="https://raw.githubusercontent.com/beecho01/ha-addon-openwebui/refs/heads/main/docs/assets/svg/line.svg" alt="line break" width="100%" height="3px">
 
 ## License
 
 This project is licensed under the MIT License.
-
----
 
 Open WebUI © Open WebUI contributors. Home Assistant Add-on maintained by @beecho01.
 
