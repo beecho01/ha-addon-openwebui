@@ -1,17 +1,20 @@
 #!/bin/bash
+set -euo pipefail
 
-# Optional: export a consistent secret key to persist login sessions
-if [ ! -f /data/secret_key.txt ]; then
+# Persist a stable secret key so login sessions survive restarts
+SECRET_FILE="/data/secret_key.txt"
+if [[ ! -f "${SECRET_FILE}" ]]; then
   echo "Generating secret key..."
-  openssl rand -hex 32 > /data/secret_key.txt
+  openssl rand -hex 32 > "${SECRET_FILE}"
 fi
-export WEBUI_SECRET_KEY=$(cat /data/secret_key.txt)
+export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
 
-# Optional: disable auth (uncomment if needed)
-# export WEBUI_AUTH=False
+# Optional: disable login screen
+# export WEBUI_AUTH=false
+
+# Set Open WebUI Port to 3000
+export PORT=3000
 
 # Start Open WebUI
-echo "Starting Open WebUI..."
+echo "Starting Open WebUI on port ${PORT}"
 exec bash /app/backend/start.sh
-
-echo "Open WebUI should be accessible on port ${webui_port:-3000}"
