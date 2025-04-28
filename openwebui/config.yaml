@@ -1,0 +1,22 @@
+name: Open WebUI
+slug: openwebui
+version: "0.6.5"
+image: ghcr.io/open-webui/open-webui:v0.6.5@sha256:fe7a6870ec6b2fd540c0f2007e6aa812dc4bf04a2d0a305bb344eeb10de0a7b7
+description: Self-hosted AI interface — Home Assistant add-on
+url: https://github.com/beecho01/ha-addon-openwebui
+arch:
+  - aarch64
+  - amd64
+init: false
+legacy: true
+environment:
+  PORT: "3000"
+  DATA_DIR: /data
+ingress: true
+ingress_port: 3000
+ports:
+  "3000/tcp": null
+ports_description:
+  "3000/tcp": Open WebUI web interface
+panel_icon: mdi:forum
+panel_title: Open WebUI
