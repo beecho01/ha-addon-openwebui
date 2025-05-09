@@ -15,6 +15,19 @@ export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
 # Set Open WebUI Port to 3000
 export PORT=3000
 
-# Start Open WebUI
+# Start Open WebUI Message
 echo "Starting Open WebUI on port ${PORT}"
-exec bash /app/backend/start.sh
+
+# Identify the start script and run it
+if [[ -x /app/backend/start.sh ]]; then
+    START_SCRIPT=/app/backend/start.sh
+elif [[ -x /app/start.sh ]]; then
+    START_SCRIPT=/app/start.sh
+elif [[ -x /opt/open-webui/backend/start.sh ]]; then
+    START_SCRIPT=/opt/open-webui/backend/start.sh
+else
+    echo "ERROR: Cannot find Open WebUI start.sh" >&2
+    exit 1
+fi
+
+exec bash "$START_SCRIPT"
