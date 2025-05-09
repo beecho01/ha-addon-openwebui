@@ -1,7 +1,6 @@
 name: Open WebUI
 slug: openwebui
-version: "0.6.5"
-image: ghcr.io/open-webui/open-webui:v0.6.5@sha256:fe7a6870ec6b2fd540c0f2007e6aa812dc4bf04a2d0a305bb344eeb10de0a7b7
+version: "0.6.7"
 description: Self-hosted AI interface — Home Assistant add-on
 url: https://github.com/beecho01/ha-addon-openwebui
 arch:
