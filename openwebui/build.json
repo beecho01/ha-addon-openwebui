@@ -1,7 +1,8 @@
 {
   "build_from": {
     "amd64": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:e34a19488ecb6ada7711fe5900d0e70bdb6cfcec546e70599e18e9d0b6b8fee4",
-    "aarch64": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:0d9d9edb3fd510d6942dfc4862e2313d135801c67be60f27c0ef61117ed07d3d"
+    "aarch64": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:0d9d9edb3fd510d6942dfc4862e2313d135801c67be60f27c0ef61117ed07d3d",
+    "unknown": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:64864b10c635bfd15dce48cb5f0e340b9c5d9c3217fb2dbee5fb6b76899df767"
   },
   "labels": {
     "maintainer": "James Beeching (https://github.com/beecho01)",
