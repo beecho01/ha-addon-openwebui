@@ -4,7 +4,7 @@
   "version": "0.6.7",
   "description": "Self-hosted AI interface — Home Assistant add-on",
   "url": "https://github.com/beecho01/ha-addon-openwebui",
-  "arch": ["aarch64", "amd64", "unknown"],
+  "arch": ["aarch64", "amd64"],
   "startup": "services",
   "init": false,
   "ingress": true,
