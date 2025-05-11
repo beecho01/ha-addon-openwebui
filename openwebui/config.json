@@ -8,16 +8,16 @@
   "startup": "services",
   "init": false,
   "ingress": true,
-  "ingress_port": 3000,
+  "ingress_port": 8080,
   "environment": {
-    "PORT": "3000",
+    "PORT": "8080",
     "DATA_DIR": "/data"
   },
   "ports": {
-    "3000/tcp": null
+    "8080/tcp": null
   },
   "ports_description": {
-    "3000/tcp": "Open WebUI web interface"
+    "8080/tcp": "Open WebUI web interface"
   },
   "panel_icon": "mdi:forum",
   "panel_title": "Open WebUI"

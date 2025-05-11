@@ -9,11 +9,8 @@ if [[ ! -f "${SECRET_FILE}" ]]; then
 fi
 export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
 
-# Optional: disable login screen
-# export WEBUI_AUTH=false
-
-# Set Open WebUI Port to 3000
-export PORT=3000
+# Set port to match ingress configuration
+export PORT=8080
 
 # Start Open WebUI Message
 echo "Starting Open WebUI on port ${PORT}"
