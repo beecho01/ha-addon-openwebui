@@ -1,15 +1,16 @@
 {
   "build_from": {
-    "amd64": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:e34a19488ecb6ada7711fe5900d0e70bdb6cfcec546e70599e18e9d0b6b8fee4",
-    "aarch64": "ghcr.io/open-webui/open-webui:v0.6.7@sha256:0d9d9edb3fd510d6942dfc4862e2313d135801c67be60f27c0ef61117ed07d3d"
+    "aarch64": "ghcr.io/open-webui/open-webui:v0.6.10@sha256:0d9ab520fe58a4f9c5a4184d93078b2d5007c56b22c7c82625b9814c9a96082a",
+    "amd64": "ghcr.io/open-webui/open-webui:v0.6.10@sha256:569925741fc7fbffebaff031703c139f487876cad428eedefbf050dcc65a8e09"
   },
   "labels": {
-    "maintainer": "James Beeching (https://github.com/beecho01)",
-    "org.opencontainers.image.authors": "James Beeching (https://github.com/beecho01)",
     "org.opencontainers.image.title": "Home Assistant Add-on: Open WebUI",
-    "org.opencontainers.image.description": "Home Assistant add-on for Open WebUI — a self-hosted LLM interface.",
     "org.opencontainers.image.documentation": "https://github.com/beecho01/ha-addon-openwebui/README.md",
     "org.opencontainers.image.source": "https://github.com/beecho01/ha-addon-openwebui",
-    "org.opencontainers.image.licenses": "MIT"
+    "maintainer": "James Beeching (https://github.com/beecho01)",
+    "org.opencontainers.image.version": "0.6.10",
+    "org.opencontainers.image.description": "Home Assistant add-on for Open WebUI — a self-hosted LLM interface.",
+    "org.opencontainers.image.licenses": "MIT",
+    "org.opencontainers.image.authors": "James Beeching (https://github.com/beecho01)"
   }
 }

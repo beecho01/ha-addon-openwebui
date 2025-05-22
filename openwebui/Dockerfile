@@ -1,6 +1,10 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
+# Include build version for better tracking
+ARG BUILD_VERSION
+LABEL org.opencontainers.image.version="${BUILD_VERSION}"
+
 RUN mkdir -p /data /app/backend \
     && ln -sfn /data /app/backend/data
 
