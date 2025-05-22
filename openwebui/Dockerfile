@@ -5,15 +5,12 @@ FROM ${BUILD_FROM}
 ARG BUILD_VERSION
 LABEL org.opencontainers.image.version="${BUILD_VERSION}"
 
-RUN mkdir -p /data /app/backend \
-    && ln -sfn /data /app/backend/data
+# Create persistent data directory link
+RUN mkdir -p /data
+RUN rm -rf /app/backend/data && ln -sf /data /app/backend/data
 
-RUN if ! command -v openssl >/dev/null 2>&1 ; then \
-      (command -v apk && apk add --no-cache openssl) || \
-      (command -v apt-get && apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*) ; \
-    fi
-
-COPY run.sh /run.sh
+COPY run.sh /
 RUN chmod +x /run.sh
 
+# Use our run script instead of the original entrypoint
 CMD ["/run.sh"]

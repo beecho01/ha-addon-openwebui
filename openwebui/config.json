@@ -1,7 +1,7 @@
 {
   "name": "Open WebUI",
   "slug": "openwebui",
-  "version": "0.6.10",
+  "version": "0.6.10-b1",
   "description": "Self-hosted AI interface — Home Assistant add-on",
   "url": "https://github.com/beecho01/ha-addon-openwebui",
   "arch": [

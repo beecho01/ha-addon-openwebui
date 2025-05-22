@@ -1,8 +1,6 @@
 # Optional parameters - if not provided, script will prompt for values
 param(
-    [string]$NewVersion,
-    [string]$Amd64Sha256,
-    [string]$Aarch64Sha256
+    [string]$NewVersion
 )
 
 # Function to get input with validation
@@ -52,29 +50,9 @@ if ([string]::IsNullOrWhiteSpace($NewVersion)) {
     }
 }
 
-# Get AMD64 SHA if not provided
-if ([string]::IsNullOrWhiteSpace($Amd64Sha256)) {
-    $shaRegex = '^[0-9a-f]{64}$'
-    $Amd64Sha256 = Get-ValidInput -Prompt "Enter the AMD64 SHA256 hash (64 characters)" -ValidationScript {
-        param($h)
-        return $h -match $shaRegex
-    }
-}
-
-# Get AARCH64 SHA if not provided
-if ([string]::IsNullOrWhiteSpace($Aarch64Sha256)) {
-    $shaRegex = '^[0-9a-f]{64}$'
-    $Aarch64Sha256 = Get-ValidInput -Prompt "Enter the AARCH64 SHA256 hash (64 characters)" -ValidationScript {
-        param($h)
-        return $h -match $shaRegex
-    }
-}
-
 # Confirm inputs
 Write-Host "`nPlease confirm these details:" -ForegroundColor Cyan
 Write-Host "Version: $NewVersion" -ForegroundColor Green
-Write-Host "AMD64 SHA256: $Amd64Sha256" -ForegroundColor Green
-Write-Host "AARCH64 SHA256: $Aarch64Sha256" -ForegroundColor Green
 
 $confirm = Read-Host -Prompt "Continue with update? (Y/n)"
 if ($confirm -eq "n") {
@@ -85,17 +63,13 @@ if ($confirm -eq "n") {
 # Create version.json content
 $versionJson = @{
     version = $NewVersion
-    sha256 = @{
-        amd64 = $Amd64Sha256
-        aarch64 = $Aarch64Sha256
-    }
 } | ConvertTo-Json -Depth 3
 
 # Create build.json content
 $buildJson = @{
     build_from = @{
-        amd64 = "ghcr.io/open-webui/open-webui:v$NewVersion@sha256:$Amd64Sha256"
-        aarch64 = "ghcr.io/open-webui/open-webui:v$NewVersion@sha256:$Aarch64Sha256"
+        amd64 = "ghcr.io/open-webui/open-webui:v$NewVersion"
+        aarch64 = "ghcr.io/open-webui/open-webui:v$NewVersion"
     }
     labels = @{
         maintainer = "James Beeching (https://github.com/beecho01)"
