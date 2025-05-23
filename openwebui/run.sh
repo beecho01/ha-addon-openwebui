@@ -15,10 +15,19 @@ export PORT=8080
 # Set data directory
 export DATA_DIR="/data"
 
+# Configure for ingress
+if [[ -n "${SUPERVISOR_TOKEN:-}" ]]; then
+  # We're running in Home Assistant
+  INGRESS_PATH=$(echo "${INGRESS_URL}" | sed -e 's|^.*/ingress/|/api/hassio_ingress/|')
+  export WEBUI_BASE_PATH=""
+  export UVICORN_ROOT_PATH="${INGRESS_PATH}"
+  echo "Configuring for ingress: ${INGRESS_PATH}"
+fi
+
 # Based on the official Dockerfile, Open WebUI starts with:
 # CMD [ "bash", "start.sh"] from /app/backend
 if [[ -f /app/backend/start.sh ]]; then
-    echo "Starting Open WebUI using official start script"
+    echo "Starting Open WebUI..."
     cd /app/backend
     exec bash start.sh
 else
