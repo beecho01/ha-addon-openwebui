@@ -9,45 +9,15 @@ if [[ ! -f "${SECRET_FILE}" ]]; then
 fi
 export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
 
-# Set port to match ingress configuration
-export PORT=8080
-
-# Set data directory
+# Run OpenWebUI on port 8081 (internal only)
+export PORT=8081 
 export DATA_DIR="/data"
 
-# Configure for ingress
-if [[ -n "${SUPERVISOR_TOKEN:-}" ]]; then
-  # We're running in Home Assistant
-  echo "Running in Home Assistant with ingress"
-  
-  # Handle ingress path configuration
-  if [[ -n "${INGRESS_URL:-}" ]]; then
-    # If Home Assistant provides INGRESS_URL, use it
-    echo "Using provided INGRESS_URL: ${INGRESS_URL}"
-    INGRESS_PATH="${INGRESS_URL#/}"
-    INGRESS_PATH="${INGRESS_PATH%/}"
-  else
-    # Fallback method using generic path
-    HOSTNAME=$(cat /etc/hostname)
-    INGRESS_PATH="api/hassio_ingress/${HOSTNAME}"
-    echo "Using fallback ingress path: ${INGRESS_PATH}"
-  fi
-  
-  # Format the path correctly for the application
-  export WEBUI_BASE_PATH="/${INGRESS_PATH}"
-  export UVICORN_ROOT_PATH="/${INGRESS_PATH}"
-  echo "Configured base paths:"
-  echo "WEBUI_BASE_PATH=${WEBUI_BASE_PATH}"
-  echo "UVICORN_ROOT_PATH=${UVICORN_ROOT_PATH}"
-fi
+# Start nginx in background
+echo "Starting nginx reverse proxy..."
+nginx
 
-# Based on the official Dockerfile, Open WebUI starts with:
-# CMD [ "bash", "start.sh"] from /app/backend
-if [[ -f /app/backend/start.sh ]]; then
-    echo "Starting Open WebUI..."
-    cd /app/backend
-    exec bash start.sh
-else
-    echo "ERROR: Cannot find /app/backend/start.sh" >&2
-    exit 1
-fi
+# Start OpenWebUI
+echo "Starting Open WebUI..."
+cd /app/backend
+exec bash start.sh
