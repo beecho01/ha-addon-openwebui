@@ -18,35 +18,30 @@ export DATA_DIR="/data"
 # Configure for ingress
 if [[ -n "${SUPERVISOR_TOKEN:-}" ]]; then
   # We're running in Home Assistant
-  if [[ -n "${INGRESS_URL:-}" ]]; then
-    # Use provided ingress URL if available
-    INGRESS_PATH=$(echo "${INGRESS_URL}" | sed -e 's|^.*/ingress/|/api/hassio_ingress/|')
-    echo "Configuring for ingress using INGRESS_URL: ${INGRESS_PATH}"
-  else
-    # Fallback to standard path format
-    echo "INGRESS_URL not provided, using standard path format"
-    INGRESS_PATH="/api/hassio_ingress/$(cat /etc/hostname)"
-    echo "Configured fallback ingress path: ${INGRESS_PATH}"
-  fi
+  echo "Running in Home Assistant with ingress"
   
-  export WEBUI_BASE_PATH=""
-  export UVICORN_ROOT_PATH="${INGRESS_PATH}"
+  # Get the ingress path from the addon info
+  ADDON_SLUG="openwebui"
+  ADDON_INFO=$(curl -s -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/addons/${ADDON_SLUG}/info)
+  INGRESS_PATH=$(echo "${ADDON_INFO}" | jq -r '.data.ingress_url' | sed 's/^\///' | sed 's/\/$//')
+  
+  if [[ -n "${INGRESS_PATH}" && "${INGRESS_PATH}" != "null" ]]; then
+    # Format the path correctly for the application
+    echo "Detected ingress path: /${INGRESS_PATH}"
+    export WEBUI_BASE_PATH="/${INGRESS_PATH}"
+    export UVICORN_ROOT_PATH="/${INGRESS_PATH}"
+  else
+    echo "Warning: Could not determine ingress path from supervisor API"
+  fi
 fi
 
 # Based on the official Dockerfile, Open WebUI starts with:
 # CMD [ "bash", "start.sh"] from /app/backend
 if [[ -f /app/backend/start.sh ]]; then
-    echo "Starting Open WebUI..."
+    echo "Starting Open WebUI with base path: ${WEBUI_BASE_PATH:-/}"
     cd /app/backend
     exec bash start.sh
 else
-    echo "ERROR: Cannot find /app/backend/start.sh - the container structure may have changed" >&2
-    
-    # Provide debugging info if the expected structure isn't found
-    echo "=== DEBUGGING CONTAINER STRUCTURE ==="
-    find / -name "start.sh" 2>/dev/null || echo "No start.sh found anywhere"
-    ls -la / || echo "/ listing failed"
-    ls -la /app 2>/dev/null || echo "/app not found" 
-    
+    echo "ERROR: Cannot find /app/backend/start.sh" >&2
     exit 1
 fi
