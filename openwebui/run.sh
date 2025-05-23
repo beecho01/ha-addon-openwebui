@@ -20,25 +20,31 @@ if [[ -n "${SUPERVISOR_TOKEN:-}" ]]; then
   # We're running in Home Assistant
   echo "Running in Home Assistant with ingress"
   
-  # Get the ingress path from the addon info
-  ADDON_SLUG="openwebui"
-  ADDON_INFO=$(curl -s -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/addons/${ADDON_SLUG}/info)
-  INGRESS_PATH=$(echo "${ADDON_INFO}" | jq -r '.data.ingress_url' | sed 's/^\///' | sed 's/\/$//')
-  
-  if [[ -n "${INGRESS_PATH}" && "${INGRESS_PATH}" != "null" ]]; then
-    # Format the path correctly for the application
-    echo "Detected ingress path: /${INGRESS_PATH}"
-    export WEBUI_BASE_PATH="/${INGRESS_PATH}"
-    export UVICORN_ROOT_PATH="/${INGRESS_PATH}"
+  # Handle ingress path configuration
+  if [[ -n "${INGRESS_URL:-}" ]]; then
+    # If Home Assistant provides INGRESS_URL, use it
+    echo "Using provided INGRESS_URL: ${INGRESS_URL}"
+    INGRESS_PATH="${INGRESS_URL#/}"
+    INGRESS_PATH="${INGRESS_PATH%/}"
   else
-    echo "Warning: Could not determine ingress path from supervisor API"
+    # Fallback method using generic path
+    HOSTNAME=$(cat /etc/hostname)
+    INGRESS_PATH="api/hassio_ingress/${HOSTNAME}"
+    echo "Using fallback ingress path: ${INGRESS_PATH}"
   fi
+  
+  # Format the path correctly for the application
+  export WEBUI_BASE_PATH="/${INGRESS_PATH}"
+  export UVICORN_ROOT_PATH="/${INGRESS_PATH}"
+  echo "Configured base paths:"
+  echo "WEBUI_BASE_PATH=${WEBUI_BASE_PATH}"
+  echo "UVICORN_ROOT_PATH=${UVICORN_ROOT_PATH}"
 fi
 
 # Based on the official Dockerfile, Open WebUI starts with:
 # CMD [ "bash", "start.sh"] from /app/backend
 if [[ -f /app/backend/start.sh ]]; then
-    echo "Starting Open WebUI with base path: ${WEBUI_BASE_PATH:-/}"
+    echo "Starting Open WebUI..."
     cd /app/backend
     exec bash start.sh
 else
